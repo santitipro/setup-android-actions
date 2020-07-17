@@ -9,10 +9,6 @@ RUN apt-get update \
 RUN pip3 install -U lxml && pip3 install -U beautifulsoup4 && pip3 install -U crcmod && \
    ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
-# Use unicode
-RUN locale-gen C.UTF-8 || true
-ENV LANG=C.UTF-
-
 ## Install firebase
 RUN curl -sL https://firebase.tools | bash
 
@@ -49,11 +45,9 @@ RUN mkdir ~/.android && echo '### User Sources for Android SDK Manager' > ~/.and
 RUN yes | sdkmanager --licenses && sdkmanager --update
 
 ## Update SDK manager and install system image, platform and build tools
-RUN sdkmanager "tools" "emulator" "platform-tools" "extras;android;m2repository"  "extras;google;m2repository" "extras;google;google_play_services"
+RUN sdkmanager "tools" "emulator" "platform-tools" "ndk-bundle" "extras;android;m2repository"  "extras;google;m2repository" "extras;google;google_play_services"
 
 RUN sdkmanager \ 
-  "build-tools;29.0.0" \
-  "build-tools;29.0.1" \
   "build-tools;29.0.2"
 
 RUN sdkmanager \
@@ -61,7 +55,6 @@ RUN sdkmanager \
   "system-images;android-26;default;x86_64"
 
 # API_LEVEL string gets replaced by m4
-RUN sdkmanager "platforms;android-29"
 RUN sdkmanager "platforms;android-26"
 RUN sdkmanager "platforms;android-22"
 
