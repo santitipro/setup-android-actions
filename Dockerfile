@@ -49,7 +49,7 @@ RUN mkdir ~/.android && echo '### User Sources for Android SDK Manager' > ~/.and
 RUN yes | sdkmanager --licenses && sdkmanager --update
 
 ## Update SDK manager and install system image, platform and build tools
-RUN sdkmanager "tools" "platform-tools" "extras;android;m2repository"  "extras;google;m2repository" "extras;google;google_play_services"
+RUN sdkmanager "tools" "emulator" "platform-tools" "extras;android;m2repository"  "extras;google;m2repository" "extras;google;google_play_services"
 
 RUN sdkmanager \ 
   "build-tools;29.0.0" \
@@ -58,3 +58,5 @@ RUN sdkmanager \
 
 # API_LEVEL string gets replaced by m4
 RUN sdkmanager "platforms;android-29"
+RUN sdkmanager "platforms;android-26"
+RUN sdkmanager "platforms;android-22"
