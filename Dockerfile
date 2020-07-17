@@ -2,9 +2,9 @@ FROM openjdk:8-jdk-slim
 LABEL DavidDexter "dmwangi@kineticengines.coke"
 ENV DEBIAN_FRONTEND noninteractive
 
-# RUN apt-get update \ 
-#  && apt-get install -qqy git locales ca-certificates curl unzip lcov sudo \
-#  python3-dev python3-pip python3-setuptools python3-wheel python3-cffi apt-transport-https lsb-release 
+RUN apt-get update \ 
+  && apt-get install -qqy git locales ca-certificates curl unzip lcov sudo \
+  python3-dev python3-pip python3-setuptools python3-wheel python3-cffi apt-transport-https lsb-release 
 
 #RUN pip3 install -U lxml && pip3 install -U beautifulsoup4 && pip3 install -U crcmod && \
 #   ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
