@@ -10,13 +10,13 @@ RUN pip3 install -U lxml && pip3 install -U beautifulsoup4 && pip3 install -U cr
    ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
 ## Install firebase
-RUN curl -sL https://firebase.tools | bash
+# RUN curl -sL https://firebase.tools | bash
 
 # Install Google Cloud SDK
 
-RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
-    echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+# RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
+#    echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+#    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
 RUN apt-get update && sudo apt-get install -y google-cloud-sdk && \
     gcloud config set component_manager/disable_update_check true
