@@ -47,6 +47,7 @@ ENV PATH=${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bi
 RUN mkdir ~/.android && echo '### User Sources for Android SDK Manager' > ~/.android/repositories.cfg
 
 RUN yes | sdkmanager --licenses && sdkmanager --update
+RUN yes | avdmanager --licenses 
 
 ## Update SDK manager and install system image, platform and build tools
 RUN sdkmanager "tools" "emulator" "platform-tools" "extras;android;m2repository"  "extras;google;m2repository" "extras;google;google_play_services"
@@ -56,7 +57,15 @@ RUN sdkmanager \
   "build-tools;29.0.1" \
   "build-tools;29.0.2"
 
+RUN sdkmanager \
+  "system-images;android-22;default;x86_64" \
+  "system-images;android-26;default;x86_64"
+
 # API_LEVEL string gets replaced by m4
 RUN sdkmanager "platforms;android-29"
 RUN sdkmanager "platforms;android-26"
 RUN sdkmanager "platforms;android-22"
+
+RUN avdmanager create avd --device "Nexus 6" --name Android_26 -k "system-images;android-26;default;x86_64" --force
+RUN avdmanager create avd --device "Nexus One" --name Android_22 -k "system-images;android-22;default;x86_64" --force
+RUN avdmanager create avd --device "10.1in WXGA (Tablet)" --name Android_tablet_26 -k "system-images;android-26;default;x86_64" --force
